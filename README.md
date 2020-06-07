@@ -220,7 +220,7 @@ Test accuracy: 0.947
 ## KNN comparison
 | Method  | Accuracy | Parameters | 
 | ------------- | ------------- | ------------- |
-| My KNN | 85.1% | n:5, metric:euclidean |
+| My KNN | 85.1% | k:5, metric:euclidean |
 | KNeighborsClassifier  | 85.1% | "n_neighbors":5,"p":2,"weights":"uniform" | 
 
 Using similar parameters, my KNN implementation can get basically the same result as other benchmarked models.  
