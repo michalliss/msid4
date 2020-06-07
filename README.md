@@ -215,6 +215,9 @@ As expected, CNN clearly outperformed KNN by over 9%.
 | KNN | 85.1% | 
 | CNN  | 94.7% | 
 
+Let's take a look at CNN results. The most problematic class is shirt. I believe it is expected behaviour, as it's hard, even for humans distinguish shirts from and t-shirts or pullovers.
+
+![confusion matrixx](readme_docs/cm.png)
 ## KNN comparison
 | Method  | Accuracy | Parameters | 
 | ------------- | ------------- | ------------- |
