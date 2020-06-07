@@ -210,8 +210,6 @@ While there is clearly some overfitting visible, it's the best result I managed 
 
 # Results
 As expected, CNN clearly outperformed KNN by over 9%.   
-Test loss: 0.298
-Test accuracy: 0.947
 | Method  | Accuracy | 
 | ------------- | ------------- | 
 | KNN | 85.1% | 
@@ -239,10 +237,11 @@ Dependencies:
 - tensorflow
 - numpy
 - cupy
+- matplotlib
 
-To run my code, you can simply download and run the included jupyter notebooks included in this repo.  
+To run KNN or CNN models yourself, you can simply download and run the included jupyter notebooks included in this repo. 
 
-For CNN, if you prefer to use pre-trained model, you can download the pre-calculated weights and load it to model [here]()
+For CNN, if you prefer to use pre-trained model, you can download the [pre-calculated weights](CNN/model.h5), put it in the working directory and load it using load_ready() function.
 
 
 
@@ -253,4 +252,6 @@ For CNN, if you prefer to use pre-trained model, you can download the pre-calcul
 
 [MIT Introduction to Deep Learning - Youtube](https://www.youtube.com/watch?v=njKP3FqW3Sk&list=PLtBw6njQRU-rwp5__7C0oIVt26ZgjG9NI)
 
+[Very Deep Convolutional Networks for Large-Scale Image Recognition](https://arxiv.org/abs/1409.1556)
 
+[Andrew Ng - Youtube](https://www.youtube.com/watch?v=ArPaAX_PhIs&list=PLkDaE6sCZn6Gl29AoE31iwdVwSG-KnDzF)
