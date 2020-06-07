@@ -21,7 +21,7 @@ y_test = np.array(y_test[:n_test]).astype('uint8')
 ```
 
 #### Classifier
-For this part, I used my implementation of K Nearest Neighbours classifier, which I had previously used for text analysis for my System Analysis and Decision Support Methods class. There was one problem - it used hamming distance as a distance metric, and it cannot be applied to non-binary data. The solution was simple - I used euclidean distance instead (without square root) 
+For this part, I used my implementation of K Nearest Neighbours classifier, which I had previously used for text analysis for my System Analysis and Decision Support Methods class. There was one problem - it used hamming distance as a distance metric, and it cannot be applied to non-binary data. The solution was simple - I used euclidean distance instead (without square root).
 
 In order to make the computations faster I used cupy instead of numpy in some critical sections in code. Thanks to it, calculating distance matrix is really fast, especially if run on powerful GPU (eg. using Google Colab).
 
@@ -51,7 +51,7 @@ y_train = y_train[n_val:]
 ```
 Pictures in this dataset are 28x28 arrays with values ranging from 0 to 255. To normalize them, I simply divide every value by 255.0. Next, the data is reshaped to fit into keras functions. 
 
-```
+```python
 # Normalize
 x_train = x_train.astype('float32') / 255.0
 x_val = x_val.astype('float32') / 255.0
@@ -71,7 +71,7 @@ Some example masks:
 
 ![erasing](readme_docs/erasing.png)
 
-```
+```python
 datagen = ImageDataGenerator(rotation_range=8, 
                              width_shift_range=0.08,
                              shear_range=0.3,
@@ -91,7 +91,7 @@ Original VGG16 network:
 <img src="readme_docs/vgg.png" width="500">
 
 In my model, the basic feature learning happens here:
-```
+```python
 model.add(Conv2D(filters,  (3,  3), padding="same", kernel_initializer=initializer))
 model.add(BatchNormalization())
 model.add(Activation("relu"))
@@ -110,7 +110,7 @@ Compared to original VGG network architecture, I added BatchNormalization and Dr
 
 
 Finally, there are two fully connected layers, and a softmax activation layer:
-```
+```python
  model.add(Flatten())
  model.add(Dense(filters * 4))
  model.add(BatchNormalization())
@@ -198,7 +198,7 @@ _________________________________________________________________
 
 
 #### Training
-Model is compiled using the Adam optimizer. It's an adaptive learning rate optimizer, making it much better than plain SDG.
+Model is compiled using the Adam optimizer. It's an adaptive learning rate optimizer, making it much better than plain SDG. For loss function, I decided to use SparseCategoricalCrossentropy, as it is indended to be used when there are two or more label classes, and labels are provided as integers.
 
 For training, I used 50 epochs and a batch size of 256. 
 
@@ -236,15 +236,17 @@ Using similar parameters, my KNN implementation can get basically the same resul
 I've gathered benchmark results of similar models.  It's kind of surprising to see that VGG16 scored lower, even though it was an inspiration for my model. 
 
 # Usage
-Dependencies: 
+Dependencies:
+
+Python 3.6.9 with:
 - tensorflow
 - numpy
 - cupy
 - matplotlib
 
-To run KNN or CNN models yourself, you can simply download and run the included jupyter notebooks included in this repo. 
+To run KNN or CNN models yourself, you can simply download and run the included jupyter notebooks included in this repo. There are also .py files with the same code.
 
-For CNN, if you prefer to use pre-trained model, you can download the [pre-calculated weights](CNN/model.h5), put it in the working directory and load it using load_ready() function.
+For CNN, if you prefer to use pre-trained model, you can download the [pre-calculated weights](CNN/model.h5), put it in the working directory and load it using load_ready() function. It will automatically run predictions on test data for you.
 
 
 
@@ -258,3 +260,5 @@ For CNN, if you prefer to use pre-trained model, you can download the [pre-calcu
 [Very Deep Convolutional Networks for Large-Scale Image Recognition](https://arxiv.org/abs/1409.1556)
 
 [Andrew Ng - Youtube](https://www.youtube.com/watch?v=ArPaAX_PhIs&list=PLkDaE6sCZn6Gl29AoE31iwdVwSG-KnDzF)
+
+[Keras API reference](https://keras.io/api/)
